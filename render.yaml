@@ -1,0 +1,19 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: lwc-tracker
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m lwc_tracker serve --host 0.0.0.0
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      # Render generates a random token once; find it under Environment in the dashboard.
+      - key: VERITY_ACCESS_TOKEN
+        generateValue: true
+      # Render's proxy is the only thing that can reach the app, so X-Forwarded-For is trustworthy.
+      - key: VERITY_TRUST_PROXY
+        value: "1"

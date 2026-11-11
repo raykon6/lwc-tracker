@@ -1,0 +1,7 @@
+Name,Email,Google Skills Profile URL
+Litmus Dev,litmus@example.com,https://www.skills.google/public_profiles/be556f7b-ab4b-4be7-82fb-9be45202ddd7
+Old Domain Link,old@example.com,https://www.cloudskillsboost.google/public_profiles/be556f7b-ab4b-4be7-82fb-9be45202ddd7
+Missing Profile,missing@example.com,https://www.skills.google/public_profiles/00000000-0000-0000-0000-000000000000
+Typo In Link,typo@example.com,https://www.skills.google/public_profile/be556f7b
+Wrong Site,wrong@example.com,https://evil.example.com/public_profiles/be556f7b-ab4b-4be7-82fb-9be45202ddd7
+Formula Attempt,=HYPERLINK("http://x"),https://www.skills.google/public_profiles/11111111-2222-3333-4444-555555555555

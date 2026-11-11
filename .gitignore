@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+*.log
+# Exported results can contain participant names and emails
+results*.csv
+results*.json
+lwc-progress-*.csv
+lwc-progress-*.json
+node_modules/

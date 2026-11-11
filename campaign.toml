@@ -1,0 +1,53 @@
+# Verity: Learn With Communities campaign configuration.
+# Every value is validated and clamped to a safe range at startup (see lwc_tracker/config.py).
+
+[campaign]
+name = "Learn With Communities"
+# Number of qualifying skill badges needed to complete the campaign.
+required_count = 10
+
+# Badges that count toward the campaign. Matching ignores case, punctuation and spacing.
+# Leave the list empty to count every badge shown on a profile.
+required_badges = [
+  "The Basics of Google Cloud Compute",
+  "Configure Service Accounts and IAM Roles for Google Cloud",
+  "Implement Speech and Language Solutions with Pre-trained APIs",
+  "Develop AI-Powered Prototypes in Google AI Studio",
+  "Analyze Images with the Cloud Vision API",
+  "Build a Website on Google Cloud",
+  "Create Your First Gemini Enterprise Application",
+  "Using the Google Cloud Speech API",
+  "Store, Process, and Manage Data on Google Cloud - Console",
+  "Explore Generative AI in Agent Platform",
+]
+
+# Optional campaign window (YYYY-MM-DD). Badges earned outside it are listed but not counted.
+start_date = ""
+end_date = ""
+
+# Badges get renamed upstream from time to time. Map an old or alternative title to its
+# current required title so renamed badges still count.
+[campaign.aliases]
+"Explore Generative AI with the Vertex AI Gemini API" = "Explore Generative AI in Agent Platform"
+
+[http]
+# Outbound politeness: a global token bucket shared by every job.
+requests_per_second = 1.0
+burst = 2
+concurrency = 3
+connect_timeout = 5.0
+read_timeout = 15.0
+max_retries = 3
+backoff_base = 1.5
+backoff_cap = 30.0
+max_response_bytes = 2_000_000
+cache_ttl_seconds = 900
+# Stop a run after this many consecutive upstream failures.
+circuit_breaker_threshold = 8
+user_agent = "Verity-LWC-Tracker/1.0 (+campaign skill badge verifier)"
+
+[limits]
+max_upload_bytes = 1_048_576
+max_rows = 5000
+max_active_jobs = 2
+job_ttl_seconds = 3600

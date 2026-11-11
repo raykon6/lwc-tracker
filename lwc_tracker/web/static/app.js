@@ -79,6 +79,11 @@
       throw new Error("The tracker server is not reachable. Check that it is still running.");
     }
     if (res.status === 401) {
+      if (state.token) {
+        state.token = null;
+        try { sessionStorage.removeItem("verity-token"); } catch { /* storage may be blocked */ }
+        showError($("auth-error"), "That token was not accepted. Check it and try again.");
+      }
       openAuth();
       throw new Error("Access token required.");
     }
@@ -99,7 +104,7 @@
       const res = await api("/api/config");
       state.config = await res.json();
     } catch (e) {
-      $("policy-text").textContent = "Server unavailable";
+      $("policy-text").textContent = e.message === "Access token required." ? "Access token needed" : "Server unavailable";
       return;
     }
     const c = state.config;
@@ -119,6 +124,7 @@
     const value = $("auth-token").value.trim();
     if (value.length < 8) { showError($("auth-error"), "Enter the full token."); return; }
     state.token = value;
+    showError($("auth-error"), "");
     try { sessionStorage.setItem("verity-token", value); } catch { /* storage may be blocked */ }
     $("auth").close();
     $("auth-token").value = "";
